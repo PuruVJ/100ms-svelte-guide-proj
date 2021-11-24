@@ -46,6 +46,14 @@
     border-radius: 8px;
   }
 
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    margin: 1rem;
+  }
+
   input {
     display: block;
 
