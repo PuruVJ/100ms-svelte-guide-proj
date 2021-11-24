@@ -2,14 +2,12 @@
   import { selectIsConnectedToRoom } from '@100mslive/hms-video-store';
   import Conference from './Conference.svelte';
   import Footer from './Footer.svelte';
+  import '../global.css';
   import Header from './Header.svelte';
-  import { getHMSState, hmsActions } from './hms';
+  import { getHMSState, hmsActions } from '../hms';
   import JoinForm from './JoinForm.svelte';
-  import './global.css';
 
   const isConnected = getHMSState(selectIsConnectedToRoom);
-
-  $: console.log('isConnected', $isConnected);
 
   function leaveRoom() {
     if ($isConnected) {

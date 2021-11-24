@@ -1,6 +1,6 @@
 <script lang="ts">
   import { HMSPeer, selectVideoTrackByPeerID } from '@100mslive/hms-video-store';
-  import { getHMSState, hmsActions } from './hms';
+  import { getHMSState, hmsActions } from '../hms';
 
   export let peer: HMSPeer;
 

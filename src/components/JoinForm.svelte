@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { hmsActions } from './hms';
+  import { hmsActions } from '../hms';
 
   let name = '';
   let token = '';

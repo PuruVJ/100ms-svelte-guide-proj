@@ -1,6 +1,6 @@
 <script lang="ts">
   import { selectPeers } from '@100mslive/hms-video-store';
-  import { getHMSState } from './hms';
+  import { getHMSState } from '../hms';
   import Peer from './Peer.svelte';
 
   const peers = getHMSState(selectPeers);

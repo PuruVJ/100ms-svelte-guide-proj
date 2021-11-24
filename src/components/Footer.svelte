@@ -1,6 +1,6 @@
 <script lang="ts">
   import { selectIsLocalAudioEnabled, selectIsLocalVideoEnabled } from '@100mslive/hms-video-store';
-  import { getHMSState, hmsActions } from './hms';
+  import { getHMSState, hmsActions } from '../hms';
 
   const isVideoEnabled = getHMSState(selectIsLocalVideoEnabled);
   const isAudioEnabled = getHMSState(selectIsLocalAudioEnabled);
