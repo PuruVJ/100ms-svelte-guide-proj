@@ -7,25 +7,25 @@
 
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
-  $: console.log($videoTrack);
-
   onMount(() => {
     hmsStore.getState(selectVideoTrackByPeerID(peer.id));
   });
 
   // Mount the video on our video element
   function asVideoStream(videoEl: HTMLVideoElement) {
-    if ($videoTrack.enabled) {
-      hmsActions.attachVideo($videoTrack.id, videoEl);
-    } else {
-      hmsActions.detachVideo($videoTrack.id, videoEl);
-    }
-
-    return {
-      destroy: () => {
+    if ($videoTrack) {
+      if ($videoTrack.enabled) {
+        hmsActions.attachVideo($videoTrack.id, videoEl);
+      } else {
         hmsActions.detachVideo($videoTrack.id, videoEl);
-      },
-    };
+      }
+
+      return {
+        destroy: () => {
+          hmsActions.detachVideo($videoTrack.id, videoEl);
+        },
+      };
+    }
   }
 </script>
 
