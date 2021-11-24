@@ -4,13 +4,15 @@
   import Peer from './Peer.svelte';
 
   const peers = getHMSState(selectPeers);
+
+  $: console.log($peers);
 </script>
 
 <section class="conference-section">
   <h2>Conference</h2>
 
   <div class="peers-container">
-    {#each $peers as peer}
+    {#each $peers || [] as peer}
       <Peer {peer} />
     {/each}
   </div>

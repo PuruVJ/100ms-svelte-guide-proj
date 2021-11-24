@@ -5,6 +5,7 @@
   let token = '';
 
   function join() {
+    console.log(token);
     hmsActions.join({ userName: name, authToken: token });
   }
 </script>

@@ -1,14 +1,21 @@
 <script lang="ts">
   import { HMSPeer, selectVideoTrackByPeerID } from '@100mslive/hms-video-store';
-  import { getHMSState, hmsActions } from './hms';
+  import { onMount } from 'svelte';
+  import { getHMSState, hmsActions, hmsStore } from './hms';
 
   export let peer: HMSPeer;
 
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
+  $: console.log($videoTrack);
+
+  onMount(() => {
+    hmsStore.getState(selectVideoTrackByPeerID(peer.id));
+  });
+
   // Mount the video on our video element
   function asVideoStream(videoEl: HTMLVideoElement) {
-    if ($videoTrack) {
+    if ($videoTrack.enabled) {
       hmsActions.attachVideo($videoTrack.id, videoEl);
     } else {
       hmsActions.detachVideo($videoTrack.id, videoEl);
