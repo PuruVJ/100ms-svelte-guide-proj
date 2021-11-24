@@ -4,8 +4,6 @@
   import Peer from './Peer.svelte';
 
   const peers = getHMSState(selectPeers);
-
-  $: console.log($peers);
 </script>
 
 <section class="conference-section">
