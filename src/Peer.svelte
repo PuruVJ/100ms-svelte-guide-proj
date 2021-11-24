@@ -1,15 +1,10 @@
 <script lang="ts">
   import { HMSPeer, selectVideoTrackByPeerID } from '@100mslive/hms-video-store';
-  import { onMount } from 'svelte';
-  import { getHMSState, hmsActions, hmsStore } from './hms';
+  import { getHMSState, hmsActions } from './hms';
 
   export let peer: HMSPeer;
 
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
-
-  onMount(() => {
-    hmsStore.getState(selectVideoTrackByPeerID(peer.id));
-  });
 
   // Mount the video on our video element
   function asVideoStream(videoEl: HTMLVideoElement) {
@@ -19,13 +14,13 @@
       } else {
         hmsActions.detachVideo($videoTrack.id, videoEl);
       }
-
-      return {
-        destroy: () => {
-          hmsActions.detachVideo($videoTrack.id, videoEl);
-        },
-      };
     }
+
+    return {
+      destroy: () => {
+        if ($videoTrack) hmsActions.detachVideo($videoTrack.id, videoEl);
+      },
+    };
   }
 </script>
 
