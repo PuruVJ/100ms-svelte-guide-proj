@@ -19,3 +19,6 @@
     <button id="leave-btn" class="btn-danger" on:click={leaveRoom}> Leave Room </button>
   {/if}
 </header>
+
+<style>
+</style>

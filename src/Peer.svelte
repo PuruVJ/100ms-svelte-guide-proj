@@ -40,3 +40,29 @@
     {/if}
   </div>
 </section>
+
+<style>
+  .peer-video {
+    height: 250px;
+    width: 250px;
+
+    margin-bottom: 10px;
+
+    border-radius: 40%;
+
+    object-fit: cover;
+  }
+
+  .peer-video.local {
+    transform: scaleX(-1);
+  }
+
+  .peer-name {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .peer-container {
+    padding: 10px;
+  }
+</style>

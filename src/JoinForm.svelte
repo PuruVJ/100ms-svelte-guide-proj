@@ -34,3 +34,44 @@
 
   <button type="submit" class="btn-primary">Join</button>
 </form>
+
+<style>
+  form {
+    max-width: 450px;
+
+    margin: 30px auto;
+    padding: 20px;
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+  }
+
+  input {
+    display: block;
+
+    width: 100%;
+    height: 34px;
+
+    padding: 5px;
+
+    color: inherit;
+    font-family: inherit;
+
+    background: #37474f;
+
+    border-radius: 8px;
+    border: 2px solid transparent;
+  }
+
+  input::placeholder {
+    color: #aaa;
+  }
+
+  .input-container {
+    margin-bottom: 20px;
+  }
+
+  form h2 {
+    margin-bottom: 20px;
+  }
+</style>

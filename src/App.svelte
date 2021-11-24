@@ -5,6 +5,7 @@
   import Header from './Header.svelte';
   import { getHMSState, hmsActions } from './hms';
   import JoinForm from './JoinForm.svelte';
+  import './global.css';
 
   const isConnected = getHMSState(selectIsConnectedToRoom);
 
