@@ -18,6 +18,8 @@
       }
     }
 
+    mountVideo();
+
     return {
       update: () => {
         mountVideo();
