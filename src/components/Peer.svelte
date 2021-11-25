@@ -6,29 +6,19 @@
 
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
-  // Mount the video on our video element
-  function asVideoStream(videoEl: HTMLVideoElement, videoTrack: HMSTrack) {
-    function mountVideo() {
-      if (videoTrack) {
-        if (videoTrack.enabled) {
-          hmsActions.attachVideo(videoTrack.id, videoEl);
-        } else {
-          hmsActions.detachVideo(videoTrack.id, videoEl);
-        }
+  let videoEl: HTMLVideoElement;
+
+  function attachVideo(videoTrack: HMSTrack) {
+    if (videoTrack) {
+      if (videoTrack.enabled) {
+        hmsActions.attachVideo(videoTrack.id, videoEl);
+      } else {
+        hmsActions.detachVideo(videoTrack.id, videoEl);
       }
     }
-
-    mountVideo();
-
-    return {
-      update: () => {
-        mountVideo();
-      },
-      destroy: () => {
-        if (videoTrack) hmsActions.detachVideo(videoTrack.id, videoEl);
-      },
-    };
   }
+
+  $: attachVideo($videoTrack);
 </script>
 
 <section class="peer-container">
@@ -38,7 +28,7 @@
     autoPlay
     muted
     playsInline
-    use:asVideoStream={$videoTrack}
+    bind:this={videoEl}
   />
 
   <div class="peer-name">
