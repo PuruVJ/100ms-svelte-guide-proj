@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { HMSPeer, selectVideoTrackByPeerID } from '@100mslive/hms-video-store';
+  import { HMSPeer, HMSTrack, selectVideoTrackByPeerID } from '@100mslive/hms-video-store';
   import { getHMSState, hmsActions } from '../hms';
 
   export let peer: HMSPeer;
@@ -7,18 +7,23 @@
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
   // Mount the video on our video element
-  function asVideoStream(videoEl: HTMLVideoElement) {
-    if ($videoTrack) {
-      if ($videoTrack.enabled) {
-        hmsActions.attachVideo($videoTrack.id, videoEl);
-      } else {
-        hmsActions.detachVideo($videoTrack.id, videoEl);
+  function asVideoStream(videoEl: HTMLVideoElement, videoTrack: HMSTrack) {
+    function mountVideo() {
+      if (videoTrack) {
+        if (videoTrack.enabled) {
+          hmsActions.attachVideo(videoTrack.id, videoEl);
+        } else {
+          hmsActions.detachVideo(videoTrack.id, videoEl);
+        }
       }
     }
 
     return {
+      update: () => {
+        mountVideo();
+      },
       destroy: () => {
-        if ($videoTrack) hmsActions.detachVideo($videoTrack.id, videoEl);
+        if (videoTrack) hmsActions.detachVideo(videoTrack.id, videoEl);
       },
     };
   }
@@ -31,7 +36,7 @@
     autoPlay
     muted
     playsInline
-    use:asVideoStream
+    use:asVideoStream={$videoTrack}
   />
 
   <div class="peer-name">

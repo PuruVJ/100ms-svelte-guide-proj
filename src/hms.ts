@@ -8,7 +8,7 @@ export const hmsStore = hms.getStore();
 export const hmsActions = hms.getHMSActions();
 
 export const getHMSState = <StateType>(selector: (state: HMSStore) => StateType) =>
-  readable<StateType>(hmsStore.getState(selector), (set) => {
+  readable(hmsStore.getState(selector), (set) => {
     const subscription = hmsStore.subscribe((val) => set(val), selector);
 
     return () => subscription();
