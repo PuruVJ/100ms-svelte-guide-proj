@@ -11,13 +11,14 @@
   $: attachVideo($videoTrack);
 
   function attachVideo(videoTrack: HMSTrack) {
-    if (videoTrack) {
-      if (videoTrack.enabled) {
-        hmsActions.attachVideo(videoTrack.id, videoEl);
-      } else {
-        hmsActions.detachVideo(videoTrack.id, videoEl);
-      }
+    if (!videoTrack) return;
+
+    if (!videoTrack.enabled) {
+      hmsActions.detachVideo(videoTrack.id, videoEl);
+      return;
     }
+
+    hmsActions.attachVideo(videoTrack.id, videoEl);
   }
 </script>
 
