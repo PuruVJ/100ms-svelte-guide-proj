@@ -4,9 +4,11 @@
 
   export let peer: HMSPeer;
 
+  let videoEl: HTMLVideoElement;
+
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
-  let videoEl: HTMLVideoElement;
+  $: attachVideo($videoTrack);
 
   function attachVideo(videoTrack: HMSTrack) {
     if (videoTrack) {
@@ -17,8 +19,6 @@
       }
     }
   }
-
-  $: attachVideo($videoTrack);
 </script>
 
 <section class="peer-container">
