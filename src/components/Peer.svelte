@@ -5,7 +5,6 @@
   export let peer: HMSPeer;
 
   let videoEl: HTMLVideoElement;
-
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
   $: attachVideo($videoTrack);
