@@ -4,7 +4,7 @@ import { readable } from 'svelte/store';
 
 const hms = new HMSReactiveStore();
 
-export const hmsStore = hms.getStore();
+const hmsStore = hms.getStore();
 export const hmsActions = hms.getHMSActions();
 
 export const getHMSState = <StateType>(selector: (state: HMSStore) => StateType) =>

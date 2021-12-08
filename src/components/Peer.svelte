@@ -4,20 +4,32 @@
 
   export let peer: HMSPeer;
 
-  let videoEl: HTMLVideoElement;
   const videoTrack = getHMSState(selectVideoTrackByPeerID(peer.id));
 
-  $: attachVideo($videoTrack);
+  function asVideoStream(videoEl: HTMLVideoElement, videoTrack: HMSTrack) {
+    function update() {
+      if (!videoTrack) return;
 
-  function attachVideo(videoTrack: HMSTrack) {
-    if (!videoTrack) return;
+      if (!videoTrack.enabled) {
+        hmsActions.detachVideo(videoTrack.id, videoEl);
+        return;
+      }
 
-    if (!videoTrack.enabled) {
-      hmsActions.detachVideo(videoTrack.id, videoEl);
-      return;
+      hmsActions.attachVideo(videoTrack.id, videoEl);
     }
 
-    hmsActions.attachVideo(videoTrack.id, videoEl);
+    function destroy() {
+      if (!videoTrack?.enabled) return;
+
+      hmsActions.detachVideo(videoTrack.id, videoEl);
+    }
+
+    update();
+
+    return {
+      update,
+      destroy,
+    };
   }
 </script>
 
@@ -28,7 +40,7 @@
     autoPlay
     muted
     playsInline
-    bind:this={videoEl}
+    use:asVideoStream={$videoTrack}
   />
 
   <div class="peer-name">

@@ -10,9 +10,7 @@
   const isConnected = getHMSState(selectIsConnectedToRoom);
 
   function leaveRoom() {
-    if ($isConnected) {
-      hmsActions.leave();
-    }
+    hmsActions.leave();
   }
 </script>
 
