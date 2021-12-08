@@ -8,9 +8,7 @@
 
   function asVideoStream(videoEl: HTMLVideoElement, videoTrack: HMSTrack) {
     function update() {
-      if (!videoTrack) return;
-
-      if (!videoTrack.enabled) {
+      if (!videoTrack?.enabled) {
         hmsActions.detachVideo(videoTrack.id, videoEl);
         return;
       }
